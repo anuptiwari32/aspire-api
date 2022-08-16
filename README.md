@@ -16,7 +16,7 @@ Run the following command to set application key if it is not set already
    php artisan key:generate
    ```
 
-Create a database in mysql eg. "aspire_db".
+Create a database in mysql eg. "aspire_db". (Sample database added)
 Modify .env and add the database name with correct database connection credentials
    ```bash
     DB_CONNECTION=mysql
