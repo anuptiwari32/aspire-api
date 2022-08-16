@@ -33,19 +33,30 @@
 		},
 		{
 			"name": "createLoan",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
 			"request": {
 				"auth": {
 					"type": "bearer",
 					"bearer": [
 						{
 							"key": "token",
-							"value": "2|plQ5OHSbsliwX812MjuXttlUPnoClpYlGnpyqPHq",
+							"value": "1|mDELTVCASDWrnma57rashhKjCKTYeI5fKlQqGxsZ",
 							"type": "string"
 						}
 					]
 				},
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
 				"body": {
 					"mode": "formdata",
 					"formdata": [
@@ -75,19 +86,30 @@
 		},
 		{
 			"name": "getLoans",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
 			"request": {
 				"auth": {
 					"type": "bearer",
 					"bearer": [
 						{
 							"key": "token",
-							"value": "2|plQ5OHSbsliwX812MjuXttlUPnoClpYlGnpyqPHq",
+							"value": "1|mDELTVCASDWrnma57rashhKjCKTYeI5fKlQqGxsZ",
 							"type": "string"
 						}
 					]
 				},
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
 				"url": {
 					"raw": "{{base_url}}/getLoans",
 					"host": [
@@ -102,25 +124,36 @@
 		},
 		{
 			"name": "approveRequest",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
 			"request": {
 				"auth": {
 					"type": "bearer",
 					"bearer": [
 						{
 							"key": "token",
-							"value": "3|qT59sNv3GEBDlGetCiUSKvy58WOSrWw3uj63hq6j",
+							"value": "2|TEP95ncXBBN6k8Uw8xtEFvDu2lupAz8RFSGyFURP",
 							"type": "string"
 						}
 					]
 				},
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
 				"body": {
 					"mode": "formdata",
 					"formdata": [
 						{
 							"key": "loan_id",
-							"value": "3",
+							"value": "1",
 							"type": "default"
 						},
 						{
@@ -144,30 +177,41 @@
 		},
 		{
 			"name": "PayLoan",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
 			"request": {
 				"auth": {
 					"type": "bearer",
 					"bearer": [
 						{
 							"key": "token",
-							"value": "2|plQ5OHSbsliwX812MjuXttlUPnoClpYlGnpyqPHq",
+							"value": "1|mDELTVCASDWrnma57rashhKjCKTYeI5fKlQqGxsK",
 							"type": "string"
 						}
 					]
 				},
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
 				"body": {
 					"mode": "formdata",
 					"formdata": [
 						{
 							"key": "pay_id",
-							"value": "4",
+							"value": "1",
 							"type": "default"
 						},
 						{
 							"key": "amount",
-							"value": "2501",
+							"value": "2000",
 							"type": "default"
 						}
 					]

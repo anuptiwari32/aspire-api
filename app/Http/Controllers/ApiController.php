@@ -10,7 +10,9 @@ use Illuminate\Support\Facades\Validator;
 
 class ApiController extends Controller
 {
-    //
+    /***
+     * method to Create the Loan Request by the User
+     */
     public function createRequest(Request $request)
     {
 
@@ -54,6 +56,9 @@ class ApiController extends Controller
         }
     }
 
+    /***
+     * method to Approve the Loan Request by the Admin
+     */
     public function approveRequest(Request $request)
     {
         try {
@@ -90,7 +95,9 @@ class ApiController extends Controller
         }
     }
 
-
+    /***
+     * method to get the list of Loan Request by the User
+     */
     public function getLoans(Request $request)
     {
         try {
@@ -134,6 +141,9 @@ class ApiController extends Controller
         }
     }
 
+    /***
+     * method to Pay the Loan scheduled payments by the Admin
+     */
     public function payLoan(Request $request)
     {
 
@@ -162,7 +172,7 @@ class ApiController extends Controller
                         $loan_pay->pay_date = date('Y-m-d');
                         $loan_pay->save();
                     } else {
-                        return ApiBaseMethod::sendError('Please add amount greater or equal to payment amnont');
+                        return ApiBaseMethod::sendError("Please add amount greater or equal to {$loan_pay->due_amount}");
                     }
 
                     if ($loan->isPaid()) {
