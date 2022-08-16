@@ -124,6 +124,7 @@ class ApiController extends Controller
                             $loan_temp_pay->due_amount = $pay->due_amount;
                             $loan_temp_pay->due_date = date('Y-m-d', strtotime($pay->due_date));
                             $loan_temp_pay->pay_status = $pay->pay_status;
+                            $loan_temp_pay->pay_date = $pay->pay_date;
                             $pay_arr[] = $loan_temp_pay;
                         }
                         $loan_temp->scheuled_payments = $pay_arr;
