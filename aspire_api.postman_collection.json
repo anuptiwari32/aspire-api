@@ -1,0 +1,215 @@
+{
+	"info": {
+		"_postman_id": "8f201b95-13e2-467c-80fb-eeeeb5f8ded1",
+		"name": "aspire_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\":\"test@example.com\",\"password\":\"123456\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/login",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createLoan",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "2|plQ5OHSbsliwX812MjuXttlUPnoClpYlGnpyqPHq",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "amount",
+							"value": "12000",
+							"type": "default"
+						},
+						{
+							"key": "term",
+							"value": "3",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/createRequest",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"createRequest"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getLoans",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "2|plQ5OHSbsliwX812MjuXttlUPnoClpYlGnpyqPHq",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/getLoans",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"getLoans"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "approveRequest",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "3|qT59sNv3GEBDlGetCiUSKvy58WOSrWw3uj63hq6j",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "loan_id",
+							"value": "3",
+							"type": "default"
+						},
+						{
+							"key": "status",
+							"value": "1",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/approveRequest",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"approveRequest"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PayLoan",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "2|plQ5OHSbsliwX812MjuXttlUPnoClpYlGnpyqPHq",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "pay_id",
+							"value": "4",
+							"type": "default"
+						},
+						{
+							"key": "amount",
+							"value": "2501",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/payLoan",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"payLoan"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "127.0.0.1:8000/api",
+			"type": "default"
+		}
+	]
+}
