@@ -32,7 +32,7 @@
 			"response": []
 		},
 		{
-			"name": "createLoan",
+			"name": "applyLoan",
 			"protocolProfileBehavior": {
 				"disabledSystemHeaders": {
 					"accept": true
@@ -62,7 +62,7 @@
 					"formdata": [
 						{
 							"key": "amount",
-							"value": "12000",
+							"value": "15000",
 							"type": "default"
 						},
 						{
@@ -73,12 +73,12 @@
 					]
 				},
 				"url": {
-					"raw": "{{base_url}}/createRequest",
+					"raw": "{{base_url}}/applyloan",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"createRequest"
+						"applyloan"
 					]
 				}
 			},
@@ -111,19 +111,19 @@
 					}
 				],
 				"url": {
-					"raw": "{{base_url}}/getLoans",
+					"raw": "{{base_url}}/getloans",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"getLoans"
+						"getloans"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "approveRequest",
+			"name": "approveLoan",
 			"protocolProfileBehavior": {
 				"disabledSystemHeaders": {
 					"accept": true
@@ -135,12 +135,12 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "2|TEP95ncXBBN6k8Uw8xtEFvDu2lupAz8RFSGyFURP",
+							"value": "7|ecwf9i6Vo9b2ovi5al0gpKuDferSKj4cVcRl8nsC",
 							"type": "string"
 						}
 					]
 				},
-				"method": "POST",
+				"method": "PUT",
 				"header": [
 					{
 						"key": "Accept",
@@ -149,13 +149,8 @@
 					}
 				],
 				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "loan_id",
-							"value": "1",
-							"type": "default"
-						},
+					"mode": "urlencoded",
+					"urlencoded": [
 						{
 							"key": "status",
 							"value": "1",
@@ -164,12 +159,13 @@
 					]
 				},
 				"url": {
-					"raw": "{{base_url}}/approveRequest",
+					"raw": "{{base_url}}/approveloan/2",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"approveRequest"
+						"approveloan",
+						"2"
 					]
 				}
 			},
@@ -188,12 +184,12 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "1|mDELTVCASDWrnma57rashhKjCKTYeI5fKlQqGxsK",
+							"value": "1|mDELTVCASDWrnma57rashhKjCKTYeI5fKlQqGxsZ",
 							"type": "string"
 						}
 					]
 				},
-				"method": "POST",
+				"method": "PUT",
 				"header": [
 					{
 						"key": "Accept",
@@ -202,27 +198,23 @@
 					}
 				],
 				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "pay_id",
-							"value": "1",
-							"type": "default"
-						},
+					"mode": "urlencoded",
+					"urlencoded": [
 						{
 							"key": "amount",
-							"value": "2000",
+							"value": "5000",
 							"type": "default"
 						}
 					]
 				},
 				"url": {
-					"raw": "{{base_url}}/payLoan",
+					"raw": "{{base_url}}/payloan/5",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"payLoan"
+						"payloan",
+						"5"
 					]
 				}
 			},

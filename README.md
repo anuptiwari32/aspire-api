@@ -3,6 +3,7 @@
 2. Make sure latest version of PHP eg.  8/8.1 is installed 
 3. Make sure MySql is installed
 4. Code Editor eg. Visual Studio Code/NotePad++
+5. Composer should be installed
 
 ## Installation
 After cloning this repo please run this to install dependecies. Open the repo into Code Editor eg. Visual Studio Code or open project root directory in command prompt or shell 
@@ -39,7 +40,7 @@ Run following command to start the application
 The application will be started at http://127.0.0.1:8000 
 
 ## Usage
-Once Application started you can test the api created for loan scheduled Payments. The POSTMAN collection for REST APIs are already added into the project root directory
+Once Application started you can test the api created for loan scheduled Payments. The POSTMAN collections for REST APIs are already added into the project root directory
 
 Credentials to test User Actions
    ```bash
@@ -53,6 +54,14 @@ Credentials to test Admin Actions
    password:123456
    ```
 
-Please get the access token for each user by hitting the login API.  Pass this into header from POSTMAN through the Bearer Token to use subsequent request. 
+Please get the access token for each user by hitting the login API.  Pass this into header from POSTMAN through the Bearer Token to use subsequent request. (Please refer to the ASPIRE_API.docx for usage).
+
+## Note
+Important Commands
+   ```bash
+     composer dump-autoload
+     php artisan optimize:clear
+     php artisan route:list
+   ```
 
 Cheers(::)

@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\AuthController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,19 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::post('/login', [AuthController::class, 'login']);
-Route::middleware('auth:sanctum')->prefix('v1')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::post('createRequest', [ApiController::class, 'createRequest']);
-    Route::post('approveRequest', [ApiController::class, 'approveRequest'])->middleware('isAdmin');
-    Route::get('getLoans', [ApiController::class, 'getLoans']);
-    Route::post('payLoan', [ApiController::class, 'payLoan']);
+    Route::post('applyloan', [ApiController::class, 'createRequest']);
+    Route::put('approveloan/{loan_id}', [ApiController::class, 'approveRequest'])->middleware('isAdmin');
+    Route::get('getloans', [ApiController::class, 'getLoans']);
+    Route::put('payloan/{pay_id}', [ApiController::class, 'payLoan']);
     
 });

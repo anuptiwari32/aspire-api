@@ -2,34 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ApiBaseMethod;
 use App\Models\Loan;
 use App\Models\LoanPayment;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
 
 class ApiController extends Controller
 {
-    /***
+    /**
      * method to Create the Loan Request by the User
-     */
-    public function createRequest(Request $request)
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+    */
+    public function createRequest(Request $request): JsonResponse
     {
-
         try {
-            //code...
-            if (ApiBaseMethod::checkUrl($request->fullUrl())) {
                 $validator = Validator::make($request->all(), [
                     'amount' => "required|numeric|gt:0",
                     'term' => "required|numeric|gt:0",
                 ]);
 
                 if ($validator->fails()) {
-                    if (ApiBaseMethod::checkUrl($request->fullUrl())) {
-                        return ApiBaseMethod::sendError('Validation Error.', $validator->errors());
+                        return sendError('Validation Error.', $validator->errors());
                     }
-                }
-
+                
                 $loan = new Loan();
                 $loan->amount = $request->amount;
                 $loan->term  = $request->term;
@@ -46,37 +43,28 @@ class ApiController extends Controller
                     $repay->save();
                 }
 
-                return ApiBaseMethod::sendResponse(['request_id'=>time() . $loan->id], 'Loan Request Processed Successfully');
-            } else {
-                return ApiBaseMethod::sendError('Please check your url');
-            }
+                return sendResponse(['request_id'=>time() . $loan->id], 'Loan Request Processed Successfully');
         } catch (\Throwable $th) {
-            return ApiBaseMethod::sendError('Internal Server Error with.', $th->getMessage());
-            //throw $th;
+            return sendError('Internal Server Error with.', $th->getMessage());   
         }
     }
 
-    /***
+    /**
      * method to Approve the Loan Request by the Admin
-     */
-    public function approveRequest(Request $request)
+     * @param Request $request
+     * @param int $loan_id
+     * @return \Illuminate\Http\JsonResponse
+    */
+    public function approveRequest(Request $request, int $loan_id) :JsonResponse
     {
         try {
-            //code...
-            if (ApiBaseMethod::checkUrl($request->fullUrl())) {
                 $validator = Validator::make($request->all(), [
-                    'loan_id' => "required|numeric|gt:0",
                     'status' => "required|numeric"
-
                 ]);
-
                 if ($validator->fails()) {
-                    if (ApiBaseMethod::checkUrl($request->fullUrl())) {
-                        return ApiBaseMethod::sendError('Validation Error.', $validator->errors());
-                    }
+                        return sendError('Validation Error.', $validator->errors());
                 }
-
-                $loan = Loan::find($request->loan_id);
+                $loan = Loan::find($loan_id);
 
                 if (isset($loan)) {
                     $loan->status = $request->status == 0 ? 'REJECTED' : 'APPROVED';
@@ -85,27 +73,21 @@ class ApiController extends Controller
                     $loan->save();
                 }
 
-                return ApiBaseMethod::sendResponse(array(), 'Loan Request ' . ($request->status == 0 ? 'REJECTED' : 'APPROVED') . ' Successfully');
-            } else {
-                return ApiBaseMethod::sendError('Please check your url');
-            }
+                return sendResponse(array(), 'Loan Request ' . ($request->status == 0 ? 'REJECTED' : 'APPROVED') . ' Successfully');
         } catch (\Throwable $th) {
-            return ApiBaseMethod::sendError('Internal Server Error with.', $th->getMessage());
-            //throw $th;
+            return sendError('Internal Server Error with.', $th->getMessage());
         }
     }
 
-    /***
+    /**
      * method to get the list of Loan Request by the User
-     */
-    public function getLoans(Request $request)
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+    */
+    public function getLoans(Request $request):JsonResponse
     {
         try {
-            //code...
-            if (ApiBaseMethod::checkUrl($request->fullUrl())) {
-
                 $loans = Loan::where('user_id', $request->user()->id)->get();
-
                 $loan_res = [];
                 if (isset($loans)) {
                     foreach ($loans as $loan) {
@@ -132,63 +114,57 @@ class ApiController extends Controller
                     }
                 }
 
-                return ApiBaseMethod::sendResponse($loan_res, 'Loan Requests List Successful');
-            } else {
-                return ApiBaseMethod::sendError('Please check your url');
-            }
+                return sendResponse($loan_res, 'Loan requests list Successful');
+           
         } catch (\Throwable $th) {
-            return ApiBaseMethod::sendError('Internal Server Error with.', $th->getMessage());
-            //throw $th;
+            return sendError('Internal Server Error with.', $th->getMessage());
+            
         }
     }
 
-    /***
+    /**
      * method to Pay the Loan scheduled payments by the Admin
-     */
-    public function payLoan(Request $request)
+     * @param Request $request
+     * @param int $pay_id
+     * @return \Illuminate\Http\JsonResponse
+    */
+    public function payLoan(Request $request, int $pay_id) :JsonResponse
     {
-
         try {
-            if (ApiBaseMethod::checkUrl($request->fullUrl())) {
                 $validator = Validator::make($request->all(), [
-                    'amount' => "required|gt:0",
-                    'pay_id' => "required",
+                    'amount' => "required|gt:0"
                 ]);
 
                 if ($validator->fails()) {
-                    if (ApiBaseMethod::checkUrl($request->fullUrl())) {
-                        return ApiBaseMethod::sendError('Validation Error.', $validator->errors());
-                    }
+                        return sendError('Validation Error.', $validator->errors());     
                 }
 
-                $loan_pay = LoanPayment::find($request->pay_id);
+                $loan_pay = LoanPayment::find($pay_id);
                 if (isset($loan_pay)) {
                     $loan = $loan_pay->loan;
 
                     if($loan->status !='APPROVED')
-                    return ApiBaseMethod::sendError('Invalid Request to pay the loan');
+                    return sendError('Invalid Request to pay the loan');
 
                     if ($request->amount >= $loan_pay->due_amount) {
                         $loan_pay->pay_status = 'PAID';
                         $loan_pay->pay_date = date('Y-m-d');
                         $loan_pay->save();
                     } else {
-                        return ApiBaseMethod::sendError("Please add amount greater or equal to {$loan_pay->due_amount}");
+                        return sendError("Please add amount greater or equal to {$loan_pay->due_amount}");
                     }
 
                     if ($loan->isPaid()) {
                         $loan->status = 'PAID';
                         $loan->save();
                     }
-                    return ApiBaseMethod::sendResponse(['payment_id'=> time() . $loan->id], 'Loan Paid Successfully');
+                    return sendResponse(['pay_request_id'=>  time().$pay_id], 'Loan Paid Successfully');
                 } else
-                    return ApiBaseMethod::sendError('Invalid loan payment request id');
-            } else {
-                return ApiBaseMethod::sendError('Please check your url');
-            }
+                    return sendError('Invalid loan payment request id');
+          
         } catch (\Throwable $th) {
-            return ApiBaseMethod::sendError('Internal Server Error with.', $th->getMessage());
-            //throw $th;
+            return sendError('Internal Server Error with.', $th->getMessage());
+            
         }
     }
 }
