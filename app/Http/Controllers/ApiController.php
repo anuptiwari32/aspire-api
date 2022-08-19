@@ -52,7 +52,7 @@ class ApiController extends Controller
     /**
      * method to Approve the Loan Request by the Admin
      * @param Request $request
-     * @param int $loan_id
+     * @param int $loan_id the Loan id to be approved
      * @return \Illuminate\Http\JsonResponse
     */
     public function approveRequest(Request $request, int $loan_id) :JsonResponse
@@ -125,7 +125,7 @@ class ApiController extends Controller
     /**
      * method to Pay the Loan scheduled payments by the Admin
      * @param Request $request
-     * @param int $pay_id
+     * @param int $pay_id the payment id for particular loan scheduled repayment
      * @return \Illuminate\Http\JsonResponse
     */
     public function payLoan(Request $request, int $pay_id) :JsonResponse

@@ -6,7 +6,7 @@
 5. Composer should be installed
 
 ## Installation
-After cloning this repo please run this to install dependecies. Open the repo into Code Editor eg. Visual Studio Code or open project root directory in command prompt or shell 
+After cloning this repo. Open the repo into Code Editor eg. Visual Studio Code or open project root directory in command prompt or shell and please run this command to install dependencies.
 
    ```bash
    composer install
