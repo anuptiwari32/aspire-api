@@ -5,28 +5,19 @@
      *
      * @return \Illuminate\Http\Response
      */
-    function sendResponse($result, $message,$flag= false)
+    function sendResponse($result, $message,$flag= false,$code=200)
     {
 
-        $api_status =1;
         $response = [];
-        if ($api_status != 0) {
-            if(!$flag)
-            $response = [
-                'success' => true,
-                'data'    => $result,
-                'message' => $message,
-            ];
-            else $response = $result;
-        } else {
-            $response = [
-
-                'success' => false,
-                'message' => 'Api Disabled',
-            ];
-        }
-
-        return response()->json($response, 200);
+        if(!$flag)
+        $response = [
+            'success' => true,
+            'data'    => $result,
+            'message' => $message,
+        ];
+        else $response = $result;
+       
+        return response()->json($response, $code);
     }
 
 

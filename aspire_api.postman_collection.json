@@ -58,16 +58,16 @@
 					}
 				],
 				"body": {
-					"mode": "formdata",
-					"formdata": [
+					"mode": "urlencoded",
+					"urlencoded": [
 						{
 							"key": "amount",
-							"value": "15000",
+							"value": "20000",
 							"type": "default"
 						},
 						{
 							"key": "term",
-							"value": "3",
+							"value": "5",
 							"type": "default"
 						}
 					]

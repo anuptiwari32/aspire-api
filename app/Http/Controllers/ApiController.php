@@ -43,7 +43,7 @@ class ApiController extends Controller
                     $repay->save();
                 }
 
-                return sendResponse(['request_id'=>time() . $loan->id], 'Loan Request Processed Successfully');
+                return sendResponse(['request_id'=>time() . $loan->id], 'Loan Request Processed Successfully',false,201);
         } catch (\Throwable $th) {
             return sendError('Internal Server Error with.', $th->getMessage());   
         }
